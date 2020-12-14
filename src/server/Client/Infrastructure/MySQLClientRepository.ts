@@ -1,6 +1,7 @@
 import { Client } from "../Domain/Client";
+import { ClientError } from "../Domain/ClientError";
 import { ClientRepository } from "../Domain/ClientRepository";
-import { Connection, queryCallback } from "mysql";
+import { Connection } from "mysql";
 
 export class MySQLClientRepository implements ClientRepository{
 
@@ -23,7 +24,7 @@ export class MySQLClientRepository implements ClientRepository{
             this.connection.query(query, data, (err, result) => {
                 
                 if(err) {
-                    reject(new Error(err.code));
+                    reject(new ClientError(`Error to insert the client => ${err.code}`));
                 }
 
                 resolve();
@@ -44,7 +45,7 @@ export class MySQLClientRepository implements ClientRepository{
             this.connection.query(query, [id], (err, result) => {
                 
                 if(err) {
-                    reject(new Error(err.code));
+                    reject(new ClientError(`Error to search the client => ${err.code}`));
                 }
 
                 var data = result[0]
@@ -65,10 +66,10 @@ export class MySQLClientRepository implements ClientRepository{
 
             var data = [client.getName(), client.getDebt(), client.getId()];
 
-            this.connection.query(query, data, (err, result) => {
+            this.connection.query(query, data, (err) => {
                 
                 if(err) {
-                    reject(new Error(err.code));
+                    reject(new ClientError(`Error to update the client => ${err.code}`));
                 }
 
                 resolve();
@@ -90,7 +91,7 @@ export class MySQLClientRepository implements ClientRepository{
             this.connection.query(query, (err, result) => {
 
                 if(err) {
-                    reject( new Error(err.code) );
+                    reject(new ClientError(`Error to get all clients => ${err.code}`));
                 }
 
                 result.forEach(function (client: any) {
