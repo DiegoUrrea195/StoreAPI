@@ -2,7 +2,6 @@ import { CreateNewClient } from "../src/server/Client/Application/CreateNewClien
 import { MySQLClientRepository } from "../src/server/Client/Infrastructure/MySQLClientRepository";
 import { MySqlConnection } from "../src/server/Shared/MySQL/MySqlConnection";
 
-import { PayBillClient } from "../src/server/Client/Application/PayBillClient";
 
 const connection =  new MySqlConnection();
 
