@@ -24,7 +24,7 @@ export class MySQLClientRepository implements ClientRepository{
             this.connection.query(query, data, (err, result) => {
                 
                 if(err) {
-                    reject(new ClientError(`Error to insert the client => ${err.code}`));
+                    reject(new ClientError(`ERROR_TO_INSERT_THE_CLIENT => ${err.code}`));
                 }
 
                 resolve();
@@ -45,7 +45,7 @@ export class MySQLClientRepository implements ClientRepository{
             this.connection.query(query, [id], (err, result) => {
                 
                 if(err) {
-                    reject(new ClientError(`Error to search the client => ${err.code}`));
+                    reject(new ClientError(`ERROR_TO_SEARCH_THE_CLIENT => ${err.code}`));
                 }
 
                 var data = result[0]
@@ -69,7 +69,7 @@ export class MySQLClientRepository implements ClientRepository{
             this.connection.query(query, data, (err) => {
                 
                 if(err) {
-                    reject(new ClientError(`Error to update the client => ${err.code}`));
+                    reject(new ClientError(`ERROR_TO_UPDATE_THE_CLIENT => ${err.code}`));
                 }
 
                 resolve();
@@ -91,7 +91,7 @@ export class MySQLClientRepository implements ClientRepository{
             this.connection.query(query, (err, result) => {
 
                 if(err) {
-                    reject(new ClientError(`Error to get all clients => ${err.code}`));
+                    reject(new ClientError(`ERROR_TO_GET_ALL_CLIENTS => ${err.code}`));
                 }
 
                 result.forEach(function (client: any) {

@@ -1,4 +1,4 @@
-import { Express, Router } from "express";
+import { Express } from "express";
 
 export class ExpressServer {
 
@@ -14,11 +14,5 @@ export class ExpressServer {
             
         })
     }
-
-
-    public addRoot(router: Router) {
-        this.server.use(router);
-    }
-
 
 }
