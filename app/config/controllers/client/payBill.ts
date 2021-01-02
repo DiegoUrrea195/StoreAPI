@@ -6,23 +6,15 @@ import { Client } from "../../../../src/server/Client/Domain/Client";
 
 export async function payBill(req: Request, res: Response) {
 
-    try {
+    var repository = new MySQLClientRepository( await connection.getConnection() );
+    var controller = new PayBillClient(repository);
 
-        var repository = new MySQLClientRepository( await connection.getConnection() );
-        var controller = new PayBillClient(repository);
+    var client: Client = await repository.search(req.body.id);
 
-        var client: Client = await repository.search(req.body.id);
-
-        controller.payBillClient(client, req.body.value);
-
+    if(controller.payBillClient(client, req.body.value)) {
         res.status(201).send(); 
-        
-
-    } catch (error) {
-        
-        res.status(500);
-
+    }else{
+        res.status(500).send();
     }
-
 
 }

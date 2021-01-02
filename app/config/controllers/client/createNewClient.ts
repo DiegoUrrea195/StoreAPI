@@ -6,20 +6,14 @@ import { connection } from "../../globals";
 
 export async function createNewClient(req: Request, res: Response) {
 
-    try {
-        
-        var repository = new MySQLClientRepository(await connection.getConnection());
-        var controller = new CreateNewClient(repository);
+    var repository = new MySQLClientRepository(await connection.getConnection());
+    var controller = new CreateNewClient(repository);
 
-        controller.createClient(createUuid(), req.body.name);
-        
+    if(controller.createClient(createUuid(), req.body.name)) {
         res.status(201).send();
-
-    } catch (error) {
-
-        console.log(error);
+    }else {
         res.status(500).send();
-        
     }
+        
 
 }

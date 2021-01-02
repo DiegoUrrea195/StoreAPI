@@ -7,22 +7,16 @@ import { Client } from "../../../../src/server/Client/Domain/Client";
 
 export async function increaseDebt(req: Request, res: Response) {
     
-    try {
+    var repository = new MySQLClientRepository(await connection.getConnection());
+    var controller = new IncreaseDebt(repository);
 
-        var repository = new MySQLClientRepository(await connection.getConnection());
-        var controller = new IncreaseDebt(repository);
+    var client: Client = await repository.search(req.body.id);
 
-        var client: Client = await repository.search(req.body.id);
-
-        controller.increaseDebt(client, req.body.value);
-
+    if(controller.increaseDebt(client, req.body.value)) {
         res.status(200).send();
-
-    }catch(error) {
-
-        console.log(error);
+    }else {
         res.status(500).send();
-
     }
+
 
 }

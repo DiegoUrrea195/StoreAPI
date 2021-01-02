@@ -14,7 +14,8 @@ CREATE TABLE employee(
 CREATE TABLE sale(
     id char(36) NOT NULL,
     value float NOT NULL,
-    employee char(36),
+    employee char(36) NOT NULL,
+    date date NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (employee) REFERENCES employee(id)
 );
