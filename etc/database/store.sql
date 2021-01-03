@@ -27,6 +27,7 @@ CREATE TABLE counts(
     description text,
     client char(36) NOT NULL,
     employee char(36) NOT NULL,
+    date date NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (client) REFERENCES client(id)
 );
