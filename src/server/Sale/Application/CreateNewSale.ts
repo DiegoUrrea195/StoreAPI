@@ -19,9 +19,9 @@ export class CreateNewSale {
             var date = new Date();
             var dateString = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
             
-            var sale: Sale = new Sale(createUuid(), value, employee, dateString);
+            //var sale: Sale = new Sale(value, dateString);
 
-            await this.repository.save(sale);
+            //await this.repository.save(sale);
 
             flag = true;
 
