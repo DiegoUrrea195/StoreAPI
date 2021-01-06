@@ -12,7 +12,7 @@ export class MySQLEmployeeRepository implements EmployeeRepository {
     }
     
 
-    save(employee: Employee): Promise<void> {
+    public save(employee: Employee): Promise<void> {
         
         return new Promise((resolve, reject) => {
             
@@ -35,7 +35,7 @@ export class MySQLEmployeeRepository implements EmployeeRepository {
     }
 
 
-    search(id: string): Promise<Employee> {
+    public search(id: string): Promise<Employee> {
     
         return new Promise((resolve, reject) => {
 
@@ -49,7 +49,7 @@ export class MySQLEmployeeRepository implements EmployeeRepository {
 
                 var data = result[0];
 
-                resolve(new Employee(data["id"], data["name"]));
+                resolve(new Employee(data["id"], data["name"], data["email"], data["password"]));
 
             });
 
@@ -58,8 +58,30 @@ export class MySQLEmployeeRepository implements EmployeeRepository {
 
     }
 
+    public searchByEmail(email: string): Promise<Employee> {
 
-    update(employee: Employee): Promise<void> {
+        return new Promise((resolve, reject) => {
+
+            var query = "SELECT * FROM employee WHERE email = ?";
+
+            this.connection.query(query, email, (err, result) => {
+
+                if(err) {
+                    reject(new EmployeeError("ERROR_TO_SEARCH_EMPLOYEE"));
+                }
+                
+                var data = result[0];
+
+                resolve(new Employee(data["id"], data["name"], data["email"], data["password"]));
+
+            }); 
+
+        });
+
+    }
+
+
+    public update(employee: Employee): Promise<void> {
         
         return new Promise((resolve, reject) => {
 
@@ -81,7 +103,7 @@ export class MySQLEmployeeRepository implements EmployeeRepository {
     }
 
 
-    delete(employee: Employee): Promise<void> {
+    public delete(employee: Employee): Promise<void> {
         
         return new Promise((resolve, reject) => {
 

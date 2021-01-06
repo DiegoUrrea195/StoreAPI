@@ -8,7 +8,7 @@ authRouter.post("/signUp", (req, res) => {
 });
 
 authRouter.post("/signIn", (req, res) => {
-
+    
 });
 
 authRouter.get("/signOut", (req, res) => {

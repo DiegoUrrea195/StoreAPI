@@ -4,8 +4,10 @@ export class Employee {
 
     private id: string;
     private name: string;
+    private email: string;
+    private password: string;
 
-    public constructor(id: string, name: string) {
+    public constructor(id: string, name: string, email: string, password: string) {
         this.id = id;
         this.name = name;
     }
@@ -16,6 +18,14 @@ export class Employee {
 
     public getName(): string {
         return this.name;
+    }
+
+    public getEmail(): string {
+        return this.email;
+    }
+
+    public getPassword(): string {
+        return this.password;
     }
 
     public rename(name: string): void {

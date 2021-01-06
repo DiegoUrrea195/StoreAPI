@@ -10,4 +10,6 @@ export interface EmployeeRepository {
 
     delete(employee: Employee): void;
 
+    searchByEmail(email: string): Promise<Employee>;
+
 }
