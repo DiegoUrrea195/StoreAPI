@@ -1,0 +1,25 @@
+version: '3'
+
+services: 
+  service-redis-store: 
+    container_name: store-redis
+    image: redis:6.0-alpine
+    ports: 
+      - 6379:6379
+
+  service-mysql-store:
+    container_name: store-mysql
+    image: mysql:5.7
+    environment: 
+      - MYSQL_ROOT_PASSWORD=diego123
+      - MYSQL_DATABASE=store
+    ports:
+      - 3306:3306
+    volumes: 
+      - "./etc/database/store.sql:/tmp/store.sql"
+    healthcheck:
+      test: ["CMD", "mysql", "--user=root", "--password=diego123", "--host=127.0.0.1", "ping", "--silent"]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+    

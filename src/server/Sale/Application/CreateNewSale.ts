@@ -10,18 +10,13 @@ export class CreateNewSale {
         this.repository = repository;
     }
 
-    public async createNewSale(value: number, employee: string) {
+    public async createNewSale(sale: Sale) {
 
         var flag: boolean;
 
         try {
-
-            var date = new Date();
-            var dateString = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
             
-            //var sale: Sale = new Sale(value, dateString);
-
-            //await this.repository.save(sale);
+            await this.repository.save(sale);
 
             flag = true;
 

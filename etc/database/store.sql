@@ -8,6 +8,8 @@ CREATE TABLE client(
 CREATE TABLE employee(
     id char(36) NOT NULL,
     name varchar(20) NOT NULL,
+    email varchar(30) NOT NULL,
+    password varchar(30) NOT NULL,
     PRIMARY KEY (id)
 );
 
