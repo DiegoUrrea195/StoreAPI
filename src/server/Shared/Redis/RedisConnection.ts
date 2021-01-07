@@ -7,9 +7,11 @@ export class RedisConnection {
     public connect(): void {
 
         this.connection = createClient();
+   
+    }
 
-        
-
+    public getConnection(): RedisClient {
+        return this.connection;
     }
 
 }
