@@ -1,5 +1,4 @@
-import {  Pool, createPool, Connection } from "mysql";
-import { MySQLError } from "./MySqlError";
+import {  Pool, createPool } from "mysql";
 
 export class MySqlConnection 
 {
@@ -20,20 +19,10 @@ export class MySqlConnection
         
     }
 
-    public async getConnection(): Promise<Connection>
+    public async getConnection(): Promise<Pool>
     {
-        return new Promise((resolve, reject) => {
-            
-            this.connection.getConnection((err, connection) => {
-               
-                if(err) {
-                    reject(new MySQLError("Error de conexion"));
-                }
-                
-                resolve(connection);
-
-            });
-        });
+    
+        return this.connection;
         
     }
 

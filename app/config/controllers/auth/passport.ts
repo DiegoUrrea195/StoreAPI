@@ -1,12 +1,12 @@
-import { use } from "passport";
-import { Strategy } from "passport-local";
+import { use, serializeUser, deserializeUser } from "passport";
+import { Strategy as LocalStrategy  } from "passport-local";
 import { MySQLEmployeeRepository } from "../../../../src/server/Employee/Infrastructure/MySQLEmployeeRepository";
 import { MySQLconnection } from "../../globals";
 import { EmployeeModel } from "./EmployeeModel";
 import { compare } from "bcrypt";
 
 
-var strategy = new Strategy(async function(email, password, done) {
+use( new LocalStrategy(async function(email, password, done) {
 
     var repository = new MySQLEmployeeRepository(await MySQLconnection.getConnection());
     
@@ -26,11 +26,12 @@ var strategy = new Strategy(async function(email, password, done) {
         }
 
     } catch (error) {
+        console.log("Error aca ");
+        
         return done(error);
     }
 
 
-});
+})
 
-
-use(strategy);
+);

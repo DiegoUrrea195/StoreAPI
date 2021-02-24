@@ -58,3 +58,5 @@ CREATE TABLE sales_of_day(
     date date NOT NULL,
     PRIMARY KEY (id)
 );
+
+INSERT INTO employee (id, name, email, password) VALUES (12345, "DIEGO", "urreadiego767@gmail.com", "diego123");

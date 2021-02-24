@@ -16,9 +16,9 @@ export class IncreaseDebt {
         var flag: boolean;
 
         try {
-            
+                        
             client.addDebt(value);
-
+            
             await this.repository.update(client);
 
             flag = true;
@@ -28,6 +28,8 @@ export class IncreaseDebt {
             flag = false;
 
         }
+
+        return flag;
 
     } 
 

@@ -44,11 +44,11 @@ export class Client
 
     }
 
-    public addDebt(value: number) {
-
-        var auxdebt: number = this.getDebt();
-
-        var result = auxdebt + value;
+    public addDebt(value: number): void {
+        
+        var auxdebt: number = this.debt;
+        
+        var result: number = (auxdebt + value);
 
         this.debt = result;
 

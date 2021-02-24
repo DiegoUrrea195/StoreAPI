@@ -1,13 +1,13 @@
 import { Sale } from "../Domain/Sale";
 import { SaleRepository } from "../Domain/SaleRepository";
-import { Connection } from "mysql";
+import { Pool } from "mysql";
 import { SaleError } from "../Domain/SaleError";
 
 export class MySQLSaleRepository implements SaleRepository {
 
-    private connection: Connection;
+    private connection: Pool;
 
-    public constructor(connection: Connection) {
+    public constructor(connection: Pool) {
         this.connection = connection;
     }
 

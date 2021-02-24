@@ -3,6 +3,7 @@ import { createNewClient } from "../controllers/client/createNewClient";
 import { increaseDebt } from "../controllers/client/increaseDebt";
 import { payBill } from "../controllers/client/payBill";
 import { getClient } from "../controllers/client/getClient";
+import { deleteClient } from "../controllers/client/deleteClient";
 
 export const clientRouter = Router();
 
@@ -24,4 +25,8 @@ clientRouter.put("/client/incresedebt", (req, res) => {
 
 clientRouter.put("/client/paybill", (req, res) => {
     payBill(req, res);
+});
+
+clientRouter.delete("/client/delete", (req, res) => {
+    deleteClient(req, res);
 });

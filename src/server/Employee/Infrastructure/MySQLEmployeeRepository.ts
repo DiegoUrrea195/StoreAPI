@@ -1,13 +1,13 @@
-import { Connection } from "mysql";
+import { Pool } from "mysql";
 import { Employee } from "../Domain/Employee";
 import { EmployeeRepository } from "../Domain/EmployeeRepository";
 import { EmployeeError } from "../Domain/EmployeeError";
 
 export class MySQLEmployeeRepository implements EmployeeRepository {
 
-    private connection: Connection;
+    private connection: Pool;
 
-    public constructor(connection: Connection) {
+    public constructor(connection: Pool) {
         this.connection = connection;
     }
     
