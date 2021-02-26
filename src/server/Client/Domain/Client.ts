@@ -1,3 +1,5 @@
+import { ClientError } from "./ClientError";
+
 export class Client 
 {
 
@@ -32,13 +34,16 @@ export class Client
         this.name = name;
     }
 
-    public payDebt(value: number): void 
+    public payDebt(pay: number): void 
     {
 
-        var pay: number = value;
-        var auxdebt: number = this.getDebt();
+        if(pay > this.debt) {
+            throw new ClientError("Payment exceeds current debt");
+        }
 
-        var result = auxdebt - pay;
+        var auxdebt: number = this.debt;
+
+        var result = (auxdebt - pay);
 
         this.debt = result;
 

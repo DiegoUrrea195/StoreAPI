@@ -11,8 +11,10 @@ export async function payBill(req: Request, res: Response) {
 
     var client: Client = await repository.search(req.body.id);
 
-    if(controller.payBillClient(client, req.body.value)) {
-        res.status(201).send(); 
+    var value = new Number(req.body.value).valueOf()
+
+    if( await controller.payBillClient(client, value)) {
+        res.status(200).send(); 
     }else{
         res.status(500).send();
     }
