@@ -1,3 +1,4 @@
+import { ClientError } from "../Domain/ClientError";
 import { ClientRepository } from "../Domain/ClientRepository";
 
 export class DeleteClient {
@@ -8,20 +9,18 @@ export class DeleteClient {
         this.repository = repository;
     }
 
-    public async deleteClient(id: string) {
-
-        var flag: boolean;
+    public async deleteClient(id: string): Promise<void | ClientError> {
 
         try {
 
-            await this.repository.delete(id)
-            flag = true
+            await this.repository.delete(id);
 
         } catch (error) {
-            flag = false
+
+            throw error;
+
         }
 
-        return flag;
 
     }
     

@@ -1,4 +1,5 @@
 import { Client } from "../Domain/Client";
+import { ClientError } from "../Domain/ClientError";
 import { ClientRepository } from "../Domain/ClientRepository";
 
 export class CreateNewClient {
@@ -9,27 +10,18 @@ export class CreateNewClient {
         this.repository = repository;
     }
 
-    public async createClient(id: string, name: string) {
-
-        var flag: boolean;
+    public async createClient(id: string, name: string): Promise<void | ClientError>{
     
         try {
             
-            var client = new Client(id, name, 0);
-           
+            var client = new Client(id, name, 0);           
             await this.repository.save(client);
-
-            flag = true;
         
         } catch (error) {
-
-            console.log(error);
-
-            flag = false;
+            
+            throw error;
             
         }
-
-        return flag;
 
     }
 

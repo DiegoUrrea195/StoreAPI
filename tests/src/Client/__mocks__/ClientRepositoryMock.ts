@@ -4,26 +4,70 @@ import { ClientError } from "../../../../src/server/Client/Domain/ClientError";
 
 export class ClientRepositoryMock implements ClientRepository{
 
-    private mock = jest.fn();
+    data: any[]
 
-    save(client: Client): void {
-        this.mock(client);
+    public constructor() {
+        this.data = [{id: "1", name: "diego", debt: 2500 },
+        {id: "2", name: "jose", debt: 8500 },
+        {id: "3", name: "rodrigo", debt: 6200 }];
     }
 
-    search(id: string): Promise<Client> {
-        return this.mock(id);
+    save(client: Client): void {
+        if(client.getId() == "false") {
+            throw new ClientError("CLIENT_ERROR");
+        }
+
+        this.data.push({id: client.getId(), name: client.getName(), debt: client.getDebt()});
+        
+    }
+
+    search(id: string): Promise<Client|null> {
+        if(id == "false") {
+            throw new ClientError("CLIENT_ERROR");
+        }
+
+        var data = this.data.find(e =>  e.id == id );
+
+        if(data == undefined) {
+            return null;
+        }
+
+        return new Promise(resolve => {
+            resolve(new Client(data.id, data.name, data.debt));
+        });
     }
 
     update(client: Client): void {
-        throw new Error("Method not implemented.");
+        if(client.getId() == "false") {
+            throw new ClientError("CLIENT_ERROR");
+        }
+
+        this.data.forEach(element => {
+            if(element.id == client.getId()) {
+                element.debt = client.getDebt();
+            }
+        });
     }
 
     all(): Promise<Client[]> {
-        throw new Error("Method not implemented.");
+        throw new ClientError("Method not implemented.");
     }
 
     delete(id: string): void {
-        throw new Error("Method not implemented.");
+        if(id == "false") {
+            throw new ClientError("CLIENT_ERROR");
+        }
+
+        var client;
+
+        this.data.forEach(e => {
+            if(e.id == id) {
+                client = this.data.indexOf(e);
+            }
+        });
+
+        this.data.splice(client, 1);
+
     }
 
 }

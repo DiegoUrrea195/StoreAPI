@@ -1,5 +1,6 @@
 import { CreateNewClient } from "../../../../src/server/Client/Application/CreateNewClient";
 import { Client } from "../../../../src/server/Client/Domain/Client";
+import { ClientError } from "../../../../src/server/Client/Domain/ClientError";
 import { ClientRepositoryMock } from "../__mocks__/ClientRepositoryMock";
 
 describe("CreateNewClient class",() => {
@@ -13,7 +14,14 @@ describe("CreateNewClient class",() => {
     });
 
     it("crear nuevo cliente en el sistema", async () => {
-        controller.createClient("holasoyunid", "diego");
+        await controller.createClient("hola", "eljefe");
+        var res = await repository.search("hola"); 
+        var exp: Client = new Client("hola", "eljefe", 0);
+        expect(res).toEqual(exp);
+    });
+
+    it("fallo, al crear un nuevo client", async () => {
+        expect( () => controller.createClient("false", "hola")).rejects.toThrow("CLIENT_ERROR");
     });
     
 });

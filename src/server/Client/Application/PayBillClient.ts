@@ -1,5 +1,6 @@
 import { ClientRepository } from "../Domain/ClientRepository";
 import { Client } from "../Domain/Client";
+import { ClientError } from "../Domain/ClientError";
 
 export class PayBillClient {
 
@@ -9,9 +10,7 @@ export class PayBillClient {
         this.repository = repository;
     }
 
-    public async payBillClient(client: Client, value: number) {
-
-        var flag: boolean;
+    public async payBillClient(client: Client, value: number): Promise<void | ClientError> {
 
         
         try {    
@@ -20,16 +19,11 @@ export class PayBillClient {
             
             await this.repository.update(client);
 
-            flag = true;
-
-
-        }catch(err) {
+        }catch(error) {
             
-            flag = false;
+            throw error;
 
         }
-
-        return flag;
 
     }
 

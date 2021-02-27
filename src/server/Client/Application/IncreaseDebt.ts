@@ -1,5 +1,6 @@
 import { ClientRepository } from "../Domain/ClientRepository";
 import { Client } from "../Domain/Client";
+import { ClientError } from "../Domain/ClientError";
 
 
 
@@ -11,26 +12,19 @@ export class IncreaseDebt {
         this.repository = repository;
     }
 
-    public async increaseDebt(client: Client, value: number) {
-
-        var flag: boolean;
+    public async increaseDebt(client: Client, value: number): Promise<void | ClientError> {
 
         try {
                         
             client.addDebt(value);
-            
             await this.repository.update(client);
-
-            flag = true;
             
         } catch (error) {
             
-            flag = false;
+            throw error;
 
         }
-
-        return flag;
-
+        
     } 
 
 }
