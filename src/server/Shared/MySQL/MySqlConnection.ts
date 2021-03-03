@@ -1,4 +1,4 @@
-import {  Pool, createPool } from "mysql";
+import {  Pool, createPool, PoolConnection } from "mysql";
 
 export class MySqlConnection 
 {
@@ -14,16 +14,29 @@ export class MySqlConnection
             user: "root",
             password: "diego123",
             database: "store",
-            connectionLimit: 2
+            connectionLimit: 2,
+            debug: false
         });
         
     }
 
-    public async getConnection(): Promise<Pool>
+    public async getConnection(): Promise<PoolConnection>
     {
-    
-        return this.connection;
-        
+        return new Promise((resolve, reject) => {
+            this.connection.getConnection((err, connection) => {
+
+                if(err) {
+                    reject(err);
+                }
+
+                resolve(connection);
+
+            })
+        });
+    }
+
+    public  close(): void {
+        this.connection.end();
     }
 
 

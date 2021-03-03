@@ -19,11 +19,11 @@ clientRouter.get("/client/all", (req, res) => {
     
 });
 
-clientRouter.put("/client/incresedebt", (req, res) => {
+clientRouter.patch("/client/incresedebt", (req, res) => {
     increaseDebt(req, res);
 });
 
-clientRouter.put("/client/paybill", (req, res) => {
+clientRouter.patch("/client/paybill", (req, res) => {
     payBill(req, res);
 });
 
