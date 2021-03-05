@@ -8,7 +8,7 @@ export interface ClientRepository
 
     update(client: Client): void;
 
-    all(): Promise<Client[]>
+    all(init: number, limit: number): Promise<Client[]>
 
     delete(id: string): void
     

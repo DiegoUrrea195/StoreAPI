@@ -7,7 +7,7 @@ import { deleteClient } from "../controllers/client/deleteClient";
 
 export const clientRouter = Router();
 
-clientRouter.get("/client", (req, res) => {
+clientRouter.get("/client/:id", (req, res) => {
     getClient(req, res);
 });
 

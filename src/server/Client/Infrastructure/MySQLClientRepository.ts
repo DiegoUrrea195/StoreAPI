@@ -82,11 +82,11 @@ export class MySQLClientRepository implements ClientRepository{
         });
     }
 
-    public async all(): Promise<Client[]> {
+    public async all(init: number, limit: number): Promise<Client[]> {
 
         return new Promise((resolve, reject) => {
 
-            var query = "SELECT * FROM client";
+            var query = `SELECT * FROM client limit ${init}, ${limit}`;
 
             var data: Client[] = [];
 

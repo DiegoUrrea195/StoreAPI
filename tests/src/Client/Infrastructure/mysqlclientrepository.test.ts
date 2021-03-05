@@ -22,7 +22,6 @@ describe("Conexion de base de datos y metodos crud implementados", () => {
   
     it("crear un nuevo client", async() => {
         var id = createUuid();
-        console.log(id);
         var client = new Client(id, "test", 0);
         expect(await repository.save(client));
     });
@@ -36,7 +35,16 @@ describe("Conexion de base de datos y metodos crud implementados", () => {
         expect(() => repository.search("hola")).rejects.toThrow("CLIENT_NOT_EXIST")
     });
 
-    
+    it("actualizar usuario existente", async() => {
+        var name = Math.floor((Math.random() * 10) + 1).toString();
+        var client = new Client("0113e8ed-3ec0-4b45-8845-2ce777478743", name, 2800);
+        await repository.update(client)
+        expect(await repository.search("0113e8ed-3ec0-4b45-8845-2ce777478743")).toBeInstanceOf(Client);
+    });
 
+    it("obtener varios usuarios", async () => {
+        var clients = await repository.all(0, 5);
+        expect(clients).toBeInstanceOf(Array)
+    })
 
 });
