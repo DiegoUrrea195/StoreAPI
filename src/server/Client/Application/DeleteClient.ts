@@ -13,6 +13,7 @@ export class DeleteClient {
 
         try {
 
+            await this.repository.search(id); // si no lanza un error es por que el usuario existe y se puede eliminar
             await this.repository.delete(id);
 
         } catch (error) {

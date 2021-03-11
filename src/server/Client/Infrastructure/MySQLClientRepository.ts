@@ -5,9 +5,9 @@ import { Pool, PoolConnection } from "mysql";
 
 export class MySQLClientRepository implements ClientRepository{
 
-    private connection: PoolConnection;
+    private connection: Pool;
 
-    public  constructor(connection: PoolConnection) {
+    public  constructor(connection: Pool) {
          this.connection = connection;
     }
 
@@ -45,10 +45,10 @@ export class MySQLClientRepository implements ClientRepository{
             this.connection.query(query, (err, result) => {
                 
                 if(err) {                    
-                    reject(new ClientError(`ERROR_TO_SEARCH_THE_CLIENT => ${err}`));
+                    reject(new ClientError(`ERROR_TO_SEARCH_THE_CLIENT`));
                 }
 
-                if(result[0] === undefined) {
+                if(typeof(result[0]) == "undefined") {
                     reject(new ClientError("CLIENT_NOT_EXIST"));
                 }else {
                     var data = result[0]

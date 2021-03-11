@@ -5,6 +5,7 @@ import { payBill } from "../controllers/client/payBill";
 import { getClient } from "../controllers/client/getClient";
 import { deleteClient } from "../controllers/client/deleteClient";
 
+
 export const clientRouter = Router();
 
 clientRouter.get("/client/:id", (req, res) => {
@@ -19,14 +20,14 @@ clientRouter.get("/client/all", (req, res) => {
     
 });
 
-clientRouter.patch("/client/incresedebt", (req, res) => {
+clientRouter.patch("/client/increasedebt/:id", (req, res) => {
     increaseDebt(req, res);
 });
 
-clientRouter.patch("/client/paybill", (req, res) => {
+clientRouter.patch("/client/paybill/:id", (req, res) => {
     payBill(req, res);
 });
 
-clientRouter.delete("/client/delete", (req, res) => {
+clientRouter.delete("/client/delete/:id", (req, res) => {
     deleteClient(req, res);
 });
