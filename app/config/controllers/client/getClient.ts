@@ -1,18 +1,32 @@
 import { Request, Response } from "express";
 import { MySQLconnection } from "../../globals";
 import { MySQLClientRepository } from "../../../../src/server/Client/Infrastructure/MySQLClientRepository";
-import { Client } from "../../../../src/server/Client/Domain/Client";
+import { GetClient } from "../../../../src/server/Client/Application/GetClient";
+import httpStatus from "http-status";
+
 
 export async function getClient(req: Request, res: Response) {
     
-    var repository = new MySQLClientRepository( await MySQLconnection.getConnection() );
+    // Type url http://host:port/client/:id
+    var id = req.params.id;
 
-    var client: Client = await repository.search(req.body.id);
+    try {
+        
+        var repository = new MySQLClientRepository( await MySQLconnection.getConnection() );
+        var controller = new GetClient(repository)
+        var client = await controller.getClient(id)
 
-    res.json({
-        "id": `${client.getId()}`,
-        "name": `${client.getName()}`,
-        "debt": client.getDebt()
-    }).send();
+        res.status(httpStatus.OK).json(client);
+        
+    } catch (error) {
+        if(error.code == "CLIENT_NOT_EXIST"){
+            res.status(httpStatus.NOT_FOUND).json({"error": error.code})
+        }else{
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ "error" : error.code})
+        }
+    }
+
+
+    
 
 }

@@ -13,6 +13,8 @@ export class DeleteClient {
 
         try {
 
+            await this.repository.search(id)
+
             await this.repository.delete(id);
 
         } catch (error) {

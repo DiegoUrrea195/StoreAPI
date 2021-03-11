@@ -3,20 +3,30 @@ import { MySQLconnection } from "../../globals";
 import { PayBillClient } from "../../../../src/server/Client/Application/PayBillClient";
 import { MySQLClientRepository } from "../../../../src/server/Client/Infrastructure/MySQLClientRepository";
 import { Client } from "../../../../src/server/Client/Domain/Client";
+import httpStatus from "http-status";
 
 export async function payBill(req: Request, res: Response) {
 
-    var repository = new MySQLClientRepository( await MySQLconnection.getConnection() );
-    var controller = new PayBillClient(repository);
-
-    var client: Client = await repository.search(req.body.id);
-
+    // Type url http://host:port/client/paybill/:id
+    // Data in the body = value
+    var id = req.params.id;
     var value = new Number(req.body.value).valueOf()
 
-    if( await controller.payBillClient(client, value)) {
-        res.status(200).send(); 
-    }else{
-        res.status(500).send();
+    try {
+
+        var repository = new MySQLClientRepository( await MySQLconnection.getConnection() );
+        var controller = new PayBillClient(repository);
+        
+        await controller.payBillClient(id, value)
+
+        res.status(httpStatus.OK).send();
+
+    } catch (error) {
+        if(error.code == "CLIENT_NOT_EXIST") {
+            res.status(httpStatus.NOT_FOUND).json({"error": error.code});
+        }else {            
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).json({"error": error.code});
+        }
     }
 
 }

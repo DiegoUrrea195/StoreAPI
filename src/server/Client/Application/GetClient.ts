@@ -10,7 +10,7 @@ export class GetClient {
         this.repository = repository;
     }
 
-    public async getClinet(id: string): Promise<ClientJson | ClientError> {
+    public async getClient(id: string): Promise<ClientJson | ClientError> {
         
         var json:ClientJson
 

@@ -1,13 +1,13 @@
 import { Client } from "../Domain/Client";
 import { ClientError } from "../Domain/ClientError";
 import { ClientRepository } from "../Domain/ClientRepository";
-import { Pool, PoolConnection } from "mysql";
+import { Pool } from "mysql";
 
 export class MySQLClientRepository implements ClientRepository{
 
-    private connection: PoolConnection;
+    private connection: Pool;
 
-    public  constructor(connection: PoolConnection) {
+    public  constructor(connection: Pool) {
          this.connection = connection;
     }
 
@@ -45,10 +45,10 @@ export class MySQLClientRepository implements ClientRepository{
             this.connection.query(query, (err, result) => {
                 
                 if(err) {                    
-                    reject(new ClientError(`ERROR_TO_SEARCH_THE_CLIENT => ${err}`));
+                    reject(new ClientError(`ERROR_TO_SEARCH_THE_CLIENT`));
                 }
 
-                if(result[0] === undefined) {
+                if(result == undefined) {
                     reject(new ClientError("CLIENT_NOT_EXIST"));
                 }else {
                     var data = result[0]

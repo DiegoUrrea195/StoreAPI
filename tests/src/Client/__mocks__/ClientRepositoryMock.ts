@@ -29,7 +29,7 @@ export class ClientRepositoryMock implements ClientRepository{
         var data = this.data.find(e =>  e.id == id );
 
         if(data == undefined) {
-            return null;
+            throw new ClientError("CLIENT_ERROR");
         }
 
         return new Promise(resolve => {

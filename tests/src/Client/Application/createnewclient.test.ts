@@ -1,6 +1,5 @@
 import { CreateNewClient } from "../../../../src/server/Client/Application/CreateNewClient";
 import { Client } from "../../../../src/server/Client/Domain/Client";
-import { ClientError } from "../../../../src/server/Client/Domain/ClientError";
 import { ClientRepositoryMock } from "../__mocks__/ClientRepositoryMock";
 
 describe("CreateNewClient class",() => {

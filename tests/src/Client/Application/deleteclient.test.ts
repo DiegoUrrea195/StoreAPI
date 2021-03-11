@@ -1,5 +1,4 @@
 import { DeleteClient } from "../../../../src/server/Client/Application/DeleteClient";
-import { ClientError } from "../../../../src/server/Client/Domain/ClientError";
 import { ClientRepositoryMock } from "../__mocks__/ClientRepositoryMock";
 
 describe("Delete new client class", () => {

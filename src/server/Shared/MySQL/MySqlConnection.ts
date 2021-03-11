@@ -20,19 +20,8 @@ export class MySqlConnection
         
     }
 
-    public async getConnection(): Promise<PoolConnection>
-    {
-        return new Promise((resolve, reject) => {
-            this.connection.getConnection((err, connection) => {
-
-                if(err) {
-                    reject(err);
-                }
-
-                resolve(connection);
-
-            })
-        });
+    public async getConnection(): Promise<Pool>{
+        return this.connection
     }
 
     public  close(): void {
