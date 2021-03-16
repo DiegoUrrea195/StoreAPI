@@ -48,7 +48,11 @@ export class MySQLClientRepository implements ClientRepository{
                     reject(new ClientError(`ERROR_TO_SEARCH_THE_CLIENT`));
                 }
 
+<<<<<<< HEAD
                 if(result == undefined) {
+=======
+                if(typeof(result[0]) == "undefined") {
+>>>>>>> bc52d51
                     reject(new ClientError("CLIENT_NOT_EXIST"));
                 }else {
                     var data = result[0]

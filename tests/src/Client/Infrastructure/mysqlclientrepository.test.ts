@@ -3,7 +3,7 @@ import { MySQLClientRepository } from "../../../../src/server/Client/Infrastruct
 import { Client } from "../../../../src/server/Client/Domain/Client";
 import { createUuid } from "../../../../src/server/Shared/util/uuid";
 
-describe("Conexion de base de datos y metodos crud implementados", () => {
+describe("Conexion de base de datos y metodos crud implementados Client", () => {
 
     var connection: MySqlConnection;
     var repository: MySQLClientRepository
@@ -19,7 +19,7 @@ describe("Conexion de base de datos y metodos crud implementados", () => {
     })
 
   
-    it("crear un nuevo client", async() => {
+    it("guadar un nuevo client", async() => {
         var id = createUuid();
         var client = new Client(id, "test", 0);
         expect(await repository.save(client));

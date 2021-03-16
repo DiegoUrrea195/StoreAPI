@@ -13,7 +13,7 @@ export class CreateNewClient {
     public async createClient(id: string, name: string): Promise<void | ClientError>{
     
         try {
-            
+            // Analizar entrada del nombre para evitar injecciones SQL
             var client = new Client(id, name, 0);           
             await this.repository.save(client);
         

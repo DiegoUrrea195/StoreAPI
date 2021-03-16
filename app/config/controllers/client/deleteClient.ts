@@ -6,25 +6,24 @@ import httpStatus from "http-status";
 
 export async function deleteClient(req: Request, res: Response) {
     
-    // Type url http://host:port/client/delete/:id 
+    //http://host:port/client/delete/:id
     var id = req.params.id;
 
     try {
-
-        var repository = new MySQLClientRepository( await MySQLconnection.getConnection() );
+        var repository = new MySQLClientRepository(await MySQLconnection.getConnection());
         var controller = new DeleteClient(repository);
-        
-        await controller.deleteClient(id)
+
+        await controller.deleteClient(id);
 
         res.status(httpStatus.OK).send();
 
     } catch (error) {
         if(error.code == "CLIENT_NOT_EXIST") {
-            res.status(httpStatus.NOT_FOUND).send({"error": error.code})
+            res.status(httpStatus.NOT_FOUND).send(error.code);
         }else {
-            res.status(httpStatus.INTERNAL_SERVER_ERROR).json({"error": error.code})
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.code);
         }
     }
 
 
-}
+}   
