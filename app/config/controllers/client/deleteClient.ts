@@ -18,7 +18,7 @@ export async function deleteClient(req: Request, res: Response) {
         res.status(httpStatus.OK).send();
 
     } catch (error) {
-        if(error.code) {
+        if(error.code == "CLIENT_NOT_EXIST") {
             res.status(httpStatus.NOT_FOUND).send(error.code);
         }else {
             res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.code);
@@ -26,4 +26,4 @@ export async function deleteClient(req: Request, res: Response) {
     }
 
 
-}
+}   

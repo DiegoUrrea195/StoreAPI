@@ -52,11 +52,4 @@ CREATE TABLE bill(
     FOREIGN KEY (employee) REFERENCES employee(id)
 );
 
-CREATE TABLE sales_of_day(
-    id char(36) NOT NULL,
-    value float NOT NULL,
-    date date NOT NULL,
-    PRIMARY KEY (id)
-);
-
 INSERT INTO employee (id, name, email, password) VALUES (12345, "DIEGO", "urreadiego767@gmail.com", "diego123");

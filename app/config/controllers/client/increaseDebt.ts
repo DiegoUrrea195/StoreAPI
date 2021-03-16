@@ -2,23 +2,29 @@ import { Request, Response } from "express";
 import { MySQLconnection } from "../../globals";
 import { MySQLClientRepository } from "../../../../src/server/Client/Infrastructure/MySQLClientRepository";
 import { IncreaseDebt } from "../../../../src/server/Client/Application/IncreaseDebt";
-import { Client } from "../../../../src/server/Client/Domain/Client";
-
+import httpStatus from "http-status";
 
 export async function increaseDebt(req: Request, res: Response) {
     
-    var repository = new MySQLClientRepository(await MySQLconnection.getConnection());
-    var controller = new IncreaseDebt(repository);
+    //http:host:port/increasedebt/:id
+    // Body => value
+    var id = req.params.id;
+    var value = new Number(req.body.value).valueOf();
+    try {
 
-    var client: Client = await repository.search(req.body.id);
-    
-    var value: number = new Number(req.body.value).valueOf();
+        var repository = new MySQLClientRepository(await MySQLconnection.getConnection());
+        var controller = new IncreaseDebt(repository);
+        
+        await controller.increaseDebt(id, value);        
+        
+        res.status(httpStatus.OK).send();
 
-    if(controller.increaseDebt(client, value)) {
-        res.status(200).send();
-    }else {
-        res.status(500).send();
+    } catch (error) {
+        if(error.code = "CLIENT_NOT_EXIST"){
+            res.status(httpStatus.NOT_FOUND).send(error.code);
+        }else {
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.code);
+        }
     }
-
 
 }

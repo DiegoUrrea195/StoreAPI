@@ -1,5 +1,4 @@
 import { ClientRepository } from "../Domain/ClientRepository";
-import { Client } from "../Domain/Client";
 import { ClientError } from "../Domain/ClientError";
 
 export class PayBillClient {
@@ -10,12 +9,13 @@ export class PayBillClient {
         this.repository = repository;
     }
 
-    public async payBillClient(client: Client, value: number): Promise<void | ClientError> {
+    public async payBillClient(id: string, value: number): Promise<void | ClientError> {
 
-        
         try {    
             
-            client.payDebt(value);
+            var client = await this.repository.search(id);
+            
+            client.payDebt(value); //comprobar entrada value
             
             await this.repository.update(client);
 

@@ -2,21 +2,33 @@ import { Request, Response } from "express";
 import { MySQLconnection } from "../../globals";
 import { PayBillClient } from "../../../../src/server/Client/Application/PayBillClient";
 import { MySQLClientRepository } from "../../../../src/server/Client/Infrastructure/MySQLClientRepository";
-import { Client } from "../../../../src/server/Client/Domain/Client";
+import httpStatus from "http-status";
 
 export async function payBill(req: Request, res: Response) {
 
-    var repository = new MySQLClientRepository( await MySQLconnection.getConnection() );
-    var controller = new PayBillClient(repository);
+    //http://host:port/paybill/:id
+    //Body => value
+    var id = req.params.id;
+    var value = new Number(req.body.value).valueOf();
 
-    var client: Client = await repository.search(req.body.id);
+    try {
+        
+        var repository = new MySQLClientRepository(await MySQLconnection.getConnection());
+        var controller = new PayBillClient(repository);
 
-    var value = new Number(req.body.value).valueOf()
+        await controller.payBillClient(id, value);
 
-    if( await controller.payBillClient(client, value)) {
-        res.status(200).send(); 
-    }else{
-        res.status(500).send();
+        res.status(httpStatus.OK).send();
+        
+    } catch (error) {
+        if(error.code == "Payment exceeds current debt") {
+            res.status(httpStatus.BAD_REQUEST).send(error.code);
+        }
+        if (error.code == "CLIENT_NOT_EXIST") {
+            res.status(httpStatus.NOT_FOUND).send(error.code);
+        }else {
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.code);
+        }
     }
 
 }

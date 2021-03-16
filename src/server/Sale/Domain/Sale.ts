@@ -1,5 +1,3 @@
-import { createUuid } from "../../Shared/util/uuid";
-
 export class Sale {
 
     private id: string;
@@ -7,9 +5,9 @@ export class Sale {
     private employee_id: string;
     private date: string;
 
-    public constructor(value: number, employee_id: string, date: string) {
+    public constructor(id: string, value: number, employee_id: string, date: string) {
 
-        this.id = createUuid();
+        this.id = id;
         this.value = value;
         this.employee_id = employee_id;
         this.date = date;
@@ -32,12 +30,6 @@ export class Sale {
     public getDate(): string {
         return this.date;
     }
-
-
-
-
-
-
 
 
 

@@ -12,11 +12,13 @@ export class IncreaseDebt {
         this.repository = repository;
     }
 
-    public async increaseDebt(client: Client, value: number): Promise<void | ClientError> {
+    public async increaseDebt(id: string, value: number): Promise<void | ClientError> {
 
         try {
-                        
-            client.addDebt(value);
+            
+            var client = await this.repository.search(id);
+            client.addDebt(value); // comprobar entrada value
+            
             await this.repository.update(client);
             
         } catch (error) {
