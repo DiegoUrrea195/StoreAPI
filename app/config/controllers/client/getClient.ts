@@ -12,7 +12,7 @@ export async function getClient(req: Request, res: Response) {
     try {
         var repository = new MySQLClientRepository(await MySQLconnection.getConnection());
         var controller = new GetClient(repository);
-        var client = await controller.getClinet(id);
+        var client = await controller.getClient(id);
 
         res.status(httpStatus.OK).json(client);
         
