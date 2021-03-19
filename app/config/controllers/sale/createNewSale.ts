@@ -8,7 +8,8 @@ import { MySQLconnection } from "../../globals";
 export async function createNewSale(req: Request, res: Response) {
 
     //http://host:port/sale/new
-    //Body => value, employee
+    //Body => value
+    // Cookie => employee_id
     var value = new Number(req.body.value).valueOf();
 
     try {

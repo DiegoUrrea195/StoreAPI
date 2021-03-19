@@ -39,7 +39,7 @@ export class MySQLAcountRepository implements AcountRepository {
         
         return new Promise((resolve, reject) => {
 
-            var query = "SELECT * FROM counts WHERE id = ?";
+            var query = "SELECT * FROM counts WHERE client = ?";
             
             var data: Acount[] = [];
 

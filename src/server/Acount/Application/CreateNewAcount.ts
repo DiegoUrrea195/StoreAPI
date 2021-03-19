@@ -22,6 +22,7 @@ export class CreateNewAcunt {
 
             var sale = new Sale(createUuid(), value, employee, createDate());
             await this.saleRepository.save(sale);
+            
             var acount = new Acount(createUuid(), value, description, client, employee, createDate());
             await this.repository.save(acount);
 

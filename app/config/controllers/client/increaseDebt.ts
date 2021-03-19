@@ -6,7 +6,7 @@ import httpStatus from "http-status";
 
 export async function increaseDebt(req: Request, res: Response) {
     
-    //http:host:port/increasedebt/:id
+    //http:host:port/client/increasedebt/:id
     // Body => value
     var id = req.params.id;
     var value = new Number(req.body.value).valueOf();

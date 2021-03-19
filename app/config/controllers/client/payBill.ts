@@ -6,7 +6,7 @@ import httpStatus from "http-status";
 
 export async function payBill(req: Request, res: Response) {
 
-    //http://host:port/paybill/:id
+    //http://host:port/client/paybill/:id
     //Body => value
     var id = req.params.id;
     var value = new Number(req.body.value).valueOf();
