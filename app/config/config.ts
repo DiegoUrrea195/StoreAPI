@@ -2,6 +2,8 @@ import { urlencoded } from "express";
 //import { REDISconnection } from "./globals";
 
 import { clientRouter } from "./routers/ClientRouter";
+import { acountRouter } from "./routers/AcountRouter";
+import { saleRouter } from "./routers/SaleRouter";
 //import { authRouter } from "./routers/AuthRouter";
 
 const express = require("express");
@@ -28,4 +30,6 @@ app.use(urlencoded({ extended: true }));
 // Router 
 //app.use(authRouter);
 app.use(clientRouter);
+app.user(saleRouter);
+app.user(acountRouter);
 
