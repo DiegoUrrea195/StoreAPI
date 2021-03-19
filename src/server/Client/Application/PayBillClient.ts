@@ -14,13 +14,8 @@ export class PayBillClient {
         try {    
             
             var client = await this.repository.search(id);
-<<<<<<< HEAD
-
-            client.payDebt(value);
-=======
             
             client.payDebt(value); //comprobar entrada value
->>>>>>> bc52d51
             
             await this.repository.update(client);
 
