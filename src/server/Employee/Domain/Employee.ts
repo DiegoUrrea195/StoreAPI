@@ -35,16 +35,5 @@ export class Employee {
         this.name  = name;
     }
 
-    public makeSale(value: number): Sale {
-
-        var date = new Date();
-        var dateString = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
-
-        var sale: Sale = new Sale(value, this.id, dateString);
-
-        return sale;
-
-    }
-
-
+ 
 }

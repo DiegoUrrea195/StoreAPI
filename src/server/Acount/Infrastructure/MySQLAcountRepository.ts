@@ -15,7 +15,7 @@ export class MySQLAcountRepository implements AcountRepository {
         
         return new Promise((resolve, reject) => {
 
-            var query = "INSERT INTO counts (id, value, description, client, employee, date) VALUES (?, ?, ?, ?, ?, ?)";
+            var query = "INSERT INTO acounts (id, value, description, client, employee, date) VALUES (?, ?, ?, ?, ?, ?)";
 
             var data = [acount.id, acount.value, acount.description, acount.client, acount.employee, acount.date];
 
@@ -39,7 +39,7 @@ export class MySQLAcountRepository implements AcountRepository {
         
         return new Promise((resolve, reject) => {
 
-            var query = "SELECT * FROM counts WHERE client = ?";
+            var query = "SELECT * FROM acounts WHERE client = ?";
             
             var data: Acount[] = [];
 

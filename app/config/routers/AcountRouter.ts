@@ -8,6 +8,6 @@ acountRouter.get("/acount/:id", (req, res) => {
     getAllAcountOfAClient(req, res);
 });
 
-acountRouter.post("acount/new", (req, res) => {
+acountRouter.post("/acount/new", (req, res) => {
     createNewAcount(req, res);
 });

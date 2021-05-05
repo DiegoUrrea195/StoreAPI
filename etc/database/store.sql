@@ -23,7 +23,7 @@ CREATE TABLE sale(
 );
 
 
-CREATE TABLE counts(
+CREATE TABLE acounts(
     id char(36) NOT NULL,
     value float NOT NULL,
     description text,
@@ -34,21 +34,15 @@ CREATE TABLE counts(
     FOREIGN KEY (client) REFERENCES client(id)
 );
 
-CREATE TABLE image(
-    id char(36) NOT NULL,
-    url_image varchar(255),
-    PRIMARY KEY (id)
-);
 
 CREATE TABLE bill(
     id char(36) NOT NULL,
     company_name varchar(255) NOT NULL,
     value double NOT NULL,
     date date NOT NULL,
-    bill_image char(36),
+    url_image varchar(255) NOT NULL,
     employee char(36),
     PRIMARY KEY (id),
-    FOREIGN KEY (bill_image) REFERENCES image(id),
     FOREIGN KEY (employee) REFERENCES employee(id)
 );
 

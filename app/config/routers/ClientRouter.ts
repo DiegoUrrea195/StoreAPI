@@ -16,15 +16,15 @@ clientRouter.post("/client/new", (req, res) => {
     createNewClient(req, res);
 });
 
-clientRouter.get("/client/all", (req, res) => {
+clientRouter.get("/client/all/for", (req, res) => {
     getAllClients(req, res);
 });
 
-clientRouter.patch("/client/increasedebt/:id", (req, res) => {
+clientRouter.put("/client/increasedebt/:id", (req, res) => {
     increaseDebt(req, res);
 });
 
-clientRouter.patch("/client/paybill/:id", (req, res) => {
+clientRouter.put("/client/paybill/:id", (req, res) => {
     payBill(req, res);
 });
 

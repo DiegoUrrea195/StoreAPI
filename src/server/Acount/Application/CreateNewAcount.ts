@@ -9,20 +9,14 @@ import { AcountRepository } from "../Domain/AcountRepository";
 export class CreateNewAcunt {
 
     private repository: AcountRepository;
-    private saleRepository: SaleRepository;
 
-    public constructor(repository: AcountRepository, saleRepository: SaleRepository) {
+    public constructor(repository: AcountRepository) {
         this.repository = repository;
-        this.saleRepository = saleRepository;
     }
 
     public async createNewAcount(value: number, client: string, employee: string, description: string): Promise<void | AcountError> {
 
-        try {
-
-            var sale = new Sale(createUuid(), value, employee, createDate());
-            await this.saleRepository.save(sale);
-            
+        try {       
             var acount = new Acount(createUuid(), value, description, client, employee, createDate());
             await this.repository.save(acount);
 

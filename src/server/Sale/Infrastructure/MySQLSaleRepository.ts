@@ -22,7 +22,6 @@ export class MySQLSaleRepository implements SaleRepository {
             this.connection.query(query, data, (err, result) => {
 
                 if(err) {
-                    console.log(err);
                     
                     if(err.code == "ER_NO_REFERENCED_ROW_2") {
                         reject(new SaleError("EMPLOYEE_NO_REGISTER"));
